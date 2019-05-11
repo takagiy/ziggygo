@@ -17,17 +17,17 @@ namespace ziggygo {
   struct block {
     std::size_t width;
     std::size_t height;
-    std::size_t padding_x;
-    std::size_t padding_y;
+    std::size_t position_left;
+    std::size_t position_top;
 
     block(std::size_t width, std::size_t height)
-        : width{width}, height{height}, padding_x{0}, padding_y{0} {}
+        : width{width}, height{height}, position_left{0}, position_top{0} {}
 
     block(const block &) = default;
 
-    auto pad(std::size_t padding_x, std::size_t padding_y) -> block & {
-      this->padding_x = padding_x;
-      this->padding_y = padding_y;
+    auto at(std::size_t position_left, std::size_t position_top) -> block & {
+      this->position_left = position_left;
+      this->position_top = position_top;
       return *this;
     }
   };
@@ -40,10 +40,10 @@ namespace ziggygo {
 
     template <class Map>
     auto fill(Map &is_block, const block &block) {
-      auto block_left = block.padding_x;
-      auto block_right = block.padding_x + block.width;
-      auto block_top = block.padding_y;
-      auto block_bottom = block.padding_y + block.height;
+      auto block_left = block.position_left;
+      auto block_right = block.position_left + block.width;
+      auto block_top = block.position_top;
+      auto block_bottom = block.position_top + block.height;
 
       for (auto x = block_left; x < block_right; ++x) {
         for (auto y = block_top; y < block_bottom; ++y) {
