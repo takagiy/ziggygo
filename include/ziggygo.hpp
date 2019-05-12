@@ -37,42 +37,30 @@ namespace ziggygo {
   namespace _ {
     struct node {};
     struct graph {};
-
-    template <class Map>
-    auto fill(Map &is_block, const block &block) {
-      auto block_left = block.position_left;
-      auto block_right = block.position_left + block.width;
-      auto block_top = block.position_top;
-      auto block_bottom = block.position_top + block.height;
-
-      for (auto x = block_left; x < block_right; ++x) {
-        for (auto y = block_top; y < block_bottom; ++y) {
-          is_block[x][y] = true;
-        }
-      }
-    }
   } // namespace _
 
   template <std::size_t Width, std::size_t Height>
   class map {
-    std::array<std::array<bool, Height>, Width> is_block_;
-    std::vector<block> blocks_;
+    std::vector<block> impassible_areas_;
 
   public:
     template <class... Blocks>
-    map(const cart &cart, const Blocks &... blocks) : is_block_{}, blocks_{blocks...} {
-      for (auto &&block : blocks_) {
-        _::fill(is_block_, block);
+    map(const cart &cart, const Blocks &... blocks)
+        : impassible_areas_{blocks...} {
+      auto padding_left = cart.width / 2;
+      auto padding_top = cart.height / 2;
+
+      for (auto &block : impassible_areas_) {
+          block.position_left -= padding_left;
+          block.width += cart.width;
+          block.positon_top -= padding_top;
+          block.height += cart.height;
       }
     }
 
     map(const map &) = default;
 
     auto find_path() -> path { return path{}; }
-
-    auto is_block(std::size_t x, std::size_t y) -> bool {
-      return is_block_[x][y];
-    }
   };
 } // namespace ziggygo
 
