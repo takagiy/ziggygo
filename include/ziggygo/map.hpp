@@ -16,14 +16,14 @@ namespace ziggygo {
     template <class... Blocks>
     map(const cart &cart, const Blocks &... blocks)
         : impassible_areas_{blocks...} {
-      auto padding_left = cart.width / 2;
-      auto padding_top = cart.height / 2;
+      auto padding_x = cart.width / 2;
+      auto padding_y = cart.height / 2;
 
       for (auto &block : impassible_areas_) {
-        block.position_left -= padding_left;
-        block.width += cart.width;
-        block.positon_top -= padding_top;
-        block.height += cart.height;
+        block.left -= padding_x;
+        block.right += padding_x;
+        block.top -= padding_y;
+        block.bottom += padding_y;
       }
     }
 
