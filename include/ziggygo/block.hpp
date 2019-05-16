@@ -5,17 +5,17 @@
 
 namespace ziggygo {
   struct block {
-    std::size_t left;
-    std::size_t right;
-    std::size_t top;
-    std::size_t bottom;
+    double left;
+    double right;
+    double top;
+    double bottom;
 
-    block(std::size_t width, std::size_t height)
+    block(double width, double height)
         : left{0}, top{0}, right{width}, bottom{height} {}
 
     block(const block &) = default;
 
-    auto at(std::size_t left, std::size_t top) -> block & {
+    auto at(double left, double top) -> block & {
       auto width = right - left;
       auto height = bottom - top;
       this->left = left;
