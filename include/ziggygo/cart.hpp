@@ -5,8 +5,8 @@
 
 namespace ziggygo {
     struct cart {
-        std::size_t width;
-        std::size_t height;
+        double width;
+        double height;
 
         cart() = default;
         cart(const cart &) = default;
