@@ -14,6 +14,10 @@ namespace ziggygo {
 
     struct path;
 
+    struct node;
+
+    struct edge;
+
     template <std::size_t, std::size_t>
     class map;
 
