@@ -1,3 +1,6 @@
+#ifndef COM_GITHUB_TAKAGIY_ZIGGYGO_DECLARE
+#define COM_GITHUB_TAKAGIY_ZIGGYGO_DECLARE
+
 #include <cstddef>
 
 namespace ziggygo {
@@ -17,3 +20,5 @@ namespace ziggygo {
     template <std::size_t, std::size_t>
     class solver;
 };
+
+#endif
