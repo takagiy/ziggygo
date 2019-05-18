@@ -17,7 +17,7 @@ namespace ziggygo {
     std::deque<node> nodes_;
 
 
-    auto is_passible(const point &p, const point &q) -> bool {
+    auto is_passible(const point &p, const point &q) const -> bool {
       for (auto &&wall : walls_) {
         if (line{p, q}.crosses(wall)) {
           return false;
