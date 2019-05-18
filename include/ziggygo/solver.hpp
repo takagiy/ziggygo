@@ -1,18 +1,20 @@
 #ifndef COM_GITHUB_TAKAGIY_ZIGGYGO_SOLVER
 #define COM_GITHUB_TAKAGIY_ZIGGYGO_SOLVER
 
+#include "./declare.hpp"
 #include "./cart.hpp"
-#include "./map.hpp"
+#include <forward_list>
 
 namespace ziggygo {
   template <std::size_t Width, std::size_t Height>
   class solver {
     cart cart_;
-    map<Width, Height> map_;
+    std::forward_list<line> walls_;
 
   public:
     solver(const cart &cart, const map<Width, Height> &map)
-        : cart_{cart}, map_{map} {}
+        : cart_{cart}, walls_{} {
+    }
 
     solver(const solver &) = default;
   };

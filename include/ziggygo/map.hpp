@@ -1,9 +1,7 @@
 #ifndef COM_GITHUB_TAKAGIY_ZIGGYGO_MAP
 #define COM_GITHUB_TAKAGIY_ZIGGYGO_MAP
 
-#include "./block.hpp"
-#include "./cart.hpp"
-#include "./path.hpp"
+#include "./declare.hpp"
 #include <cstddef>
 #include <initializer_list>
 #include <vector>
