@@ -5,10 +5,22 @@
 #include "./point.hpp"
 
 namespace ziggygo {
-    struct line {
-        point start;
-        point end;
-    };
-};
+  struct line {
+    point start;
+    point end;
+
+    auto crosses(const line &l) -> bool {
+      auto this_ = this->end - this->start;
+      auto l_ = l.end - l.start;
+
+      return cross_norm(this_, l.start - this->start) *
+                     cross_norm(this_, l.end - this->start) <
+                 0 &&
+             cross_norm(l_, this->start - l.start) *
+                     cross_norm(l_, this->end - l.start) <
+                 0;
+    }
+  };
+}; // namespace ziggygo
 
 #endif

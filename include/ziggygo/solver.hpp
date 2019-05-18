@@ -4,13 +4,37 @@
 #include "./cart.hpp"
 #include "./declare.hpp"
 #include "./line.hpp"
+#include "./node.hpp"
+#include <deque>
 #include <forward_list>
+#include <unordered_map>
 
 namespace ziggygo {
   template <std::size_t Width, std::size_t Height>
   class solver {
     cart cart_;
     std::forward_list<line> walls_;
+    std::deque<node> nodes_;
+
+
+    auto is_passible(const point &p, const point &q) -> bool {
+      for (auto &&wall : walls_) {
+        if (line{p, q}.crosses(wall)) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    auto add_node_at(const point &p) -> void {
+      nodes_.push_back(node{p});
+      auto& n = nodes_.back();
+      for (auto &&m : nodes_) {
+        if (is_passible(m.position, n.position) && m.position != n.position) {
+            node::connect(distance(m.position, n.position), &m, &n);
+        }
+      }
+    }
 
   public:
     solver(const cart &cart, const map<Width, Height> &map)
@@ -25,6 +49,11 @@ namespace ziggygo {
         walls_.push_front(line{point{l, b}, point{r, b}});
         walls_.push_front(line{point{l, t}, point{l, b}});
         walls_.push_front(line{point{r, t}, point{r, b}});
+      }
+
+      for (auto &&wall : walls_) {
+        add_node_at(wall.start);
+        add_node_at(wall.end);
       }
     }
 
