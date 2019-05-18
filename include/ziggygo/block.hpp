@@ -1,6 +1,7 @@
 #ifndef COM_GITHUB_TAKAGIY_ZIGGYGO_BLOCK
 #define COM_GITHUB_TAKAGIY_ZIGGYGO_BLOCK
 
+#include "./declare.hpp"
 #include <cstddef>
 
 namespace ziggygo {
