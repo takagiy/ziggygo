@@ -4,5 +4,6 @@
 #include "./ziggygo/cart.hpp"
 #include "./ziggygo/block.hpp"
 #include "./ziggygo/map.hpp"
+#include "./ziggygo/solver.hpp"
 
 #endif
