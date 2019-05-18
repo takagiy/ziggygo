@@ -9,7 +9,7 @@ namespace ziggygo {
     point start;
     point end;
 
-    auto crosses(const line &l) -> bool {
+    auto crosses(const line &l) const -> bool {
       auto this_ = this->end - this->start;
       auto l_ = l.end - l.start;
 
