@@ -16,13 +16,13 @@ namespace ziggygo {
 
     block(const block &) = default;
 
-    auto at(double left, double top) -> block & {
+    auto at(double left_x, double top_y) -> block & {
       auto width = right - left;
       auto height = bottom - top;
-      this->left = left;
-      this->top = top;
-      this->right = left + width;
-      this->bottom = top + height;
+      left = left_x;
+      top = top_y;
+      right = left + width;
+      bottom = top + height;
       return *this;
     }
   };
