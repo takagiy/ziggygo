@@ -4,10 +4,10 @@
 #include "./declare.hpp"
 
 namespace ziggygo {
-    struct edge {
-        unsigned long long cost;
-        const node* end;
-    };
-}
+  struct edge {
+    unsigned long long cost;
+    const node *end;
+  };
+} // namespace ziggygo
 
 #endif

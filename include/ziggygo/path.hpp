@@ -4,7 +4,7 @@
 #include "./declare.hpp"
 
 namespace ziggygo {
-    struct path {};
-}
+  struct path {};
+} // namespace ziggygo
 
 #endif

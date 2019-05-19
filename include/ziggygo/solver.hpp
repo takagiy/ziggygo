@@ -27,10 +27,10 @@ namespace ziggygo {
 
     auto add_node_at(const point &p) -> void {
       nodes_.push_back(node{p});
-      auto& n = nodes_.back();
+      auto &n = nodes_.back();
       for (auto &&m : nodes_) {
         if (is_passible(m.position, n.position) && m.position != n.position) {
-            node::connect(distance(m.position, n.position), &m, &n);
+          node::connect(distance(m.position, n.position), &m, &n);
         }
       }
     }

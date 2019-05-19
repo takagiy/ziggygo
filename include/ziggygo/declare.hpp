@@ -4,25 +4,25 @@
 #include <cstddef>
 
 namespace ziggygo {
-    struct point;
+  struct point;
 
-    struct line;
+  struct line;
 
-    struct cart;
+  struct cart;
 
-    struct block;
+  struct block;
 
-    struct path;
+  struct path;
 
-    struct node;
+  struct node;
 
-    struct edge;
+  struct edge;
 
-    template <std::size_t, std::size_t>
-    class map;
+  template <std::size_t, std::size_t>
+  class map;
 
-    template <std::size_t, std::size_t>
-    class solver;
-};
+  template <std::size_t, std::size_t>
+  class solver;
+}; // namespace ziggygo
 
 #endif
