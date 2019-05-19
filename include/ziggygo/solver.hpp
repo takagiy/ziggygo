@@ -16,7 +16,6 @@ namespace ziggygo {
     std::forward_list<line> walls_;
     std::deque<node> nodes_;
 
-
     auto is_passible(const point &p, const point &q) const -> bool {
       for (auto &&wall : walls_) {
         if (line{p, q}.crosses(wall)) {
@@ -51,10 +50,25 @@ namespace ziggygo {
         walls_.push_front(line{point{r, t}, point{r, b}});
       }
 
-      for (auto &&wall : walls_) {
-        add_node_at(wall.start);
-        add_node_at(wall.end);
+      for (auto &&rect : map.blocks_) {
+        auto l = rect.left - cart.width - 1;
+        auto r = rect.right + cart.width + 1;
+        auto t = rect.top - cart.height - 1;
+        auto b = rect.bottom + cart.height + 1;
+
+        add_node_at(point{l, t});
+        add_node_at(point{l, b});
+        add_node_at(point{r, t});
+        add_node_at(point{r, b});
       }
+    }
+
+    auto nodes() -> const std::deque<node> & {
+        return nodes_;
+    }
+
+    auto walls() -> const std::forward_list<line> & {
+        return walls_;
     }
 
     solver(const solver &) = default;
