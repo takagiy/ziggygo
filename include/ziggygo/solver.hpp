@@ -49,9 +49,9 @@ namespace ziggygo {
         : cart_{cart}, walls_{}, nodes_{}, node_at{} {
       for (auto &&rect : map.blocks_) {
         auto l = rect.left - cart.width;
-        auto r = rect.right + cart.width;
+        auto r = rect.right;
         auto t = rect.top - cart.height;
-        auto b = rect.bottom + cart.height;
+        auto b = rect.bottom;
 
         walls_.push_front(line{point{l, t}, point{r, t}});
         walls_.push_front(line{point{l, b}, point{r, b}});
@@ -61,9 +61,9 @@ namespace ziggygo {
 
       for (auto &&rect : map.blocks_) {
         auto l = rect.left - cart.width - 1;
-        auto r = rect.right + cart.width + 1;
+        auto r = rect.right + 1;
         auto t = rect.top - cart.height - 1;
-        auto b = rect.bottom + cart.height + 1;
+        auto b = rect.bottom + 1;
 
         add_node_at(point{l, t});
         add_node_at(point{l, b});
@@ -81,6 +81,7 @@ namespace ziggygo {
       }
       std::priority_queue<node *, std::vector<node *>, node_comparator>
           presumed{};
+      goal_node->from = nullptr;
       start_node->total_cost = 0;
       start_node->from = nullptr;
       presumed.push(start_node);
