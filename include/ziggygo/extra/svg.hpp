@@ -34,7 +34,8 @@ namespace ziggygo {
               << "\" stroke=\"" << color << "\" />\n";
       }
 
-      auto draw_circle(const point &center, const char *color, double r) -> void {
+      auto draw_circle(const point &center, const char *color, double r)
+          -> void {
         fout_ << "<circle cx=\"" << center.x << "\" cy=\"" << center.y
               << "\" r=\"" << r << "\""
               << " stroke-width=\"0\""
