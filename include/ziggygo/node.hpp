@@ -14,11 +14,9 @@ namespace ziggygo {
     std::forward_list<edge> edges;
     unsigned long long total_cost;
     bool sure;
+    node *from;
 
-    node(point position)
-        : position{position},
-          total_cost{std::numeric_limits<unsigned long long>::max() / 2},
-          sure{false}, edges{} {}
+    node(point position) : position{position}, edges{} {}
 
     static auto connect(unsigned long long cost, node *n, node *m) -> void {
       n->edges.push_front(edge{cost, m});
@@ -26,9 +24,12 @@ namespace ziggygo {
     }
   };
 
-  auto operator>(const node &lhs, const node &rhs) -> bool {
-    return lhs.total_cost > rhs.total_cost;
-  }
+  struct node_comparator {
+    auto operator()(const node *lhs, const node *rhs) const -> bool {
+      return lhs->total_cost > rhs->total_cost;
+    }
+  };
+
 } // namespace ziggygo
 
 #endif

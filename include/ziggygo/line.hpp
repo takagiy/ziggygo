@@ -18,7 +18,8 @@ namespace ziggygo {
       auto cnts = cross_norm(l_, this->start - l.start);
       auto cnte = cross_norm(l_, this->end - l.start);
 
-      return (cnls * cnle < 0 && cnts * cnte < 0) || (cnls == 0 || cnle == 0 || cnts == 0 || cnte == 0);
+      return (cnls * cnle < 0 && cnts * cnte < 0) ||
+             (cnls == 0 || cnle == 0 || cnts == 0 || cnte == 0);
     }
   };
 }; // namespace ziggygo

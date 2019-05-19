@@ -6,7 +6,7 @@
 namespace ziggygo {
   struct edge {
     unsigned long long cost;
-    const node *end;
+    node *end;
   };
 } // namespace ziggygo
 
