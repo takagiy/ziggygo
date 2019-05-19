@@ -3,6 +3,7 @@
 // (See accompanying file LICENSE or copy at http://boost.org/LICENSE_1_0.txt)
 
 #include <ziggygo.hpp>
+#include <ziggygo/extra.hpp>
 
 auto main() -> int {
   auto map = ziggygo::map<1000, 1000>{ziggygo::block{100, 100}.at(100, 100),
@@ -12,9 +13,8 @@ auto main() -> int {
 
   auto solver = ziggygo::make_solver(ziggygo::cart{100, 100}, map);
 
-  /*
-      auto path = solver.find_path();
+  auto path =
+      solver.find_path(ziggygo::point{500, 400}, ziggygo::point{500, 700});
 
-      ziggygo::extra::save_svg("path.svg", path, map);
-  */
+  ziggygo::extra::svg("path.svg", 1000, 1000).draw(map).draw(solver).draw(path);
 }

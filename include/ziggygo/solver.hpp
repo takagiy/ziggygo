@@ -121,15 +121,15 @@ namespace ziggygo {
       calculate_costs(start, goal);
 
       std::forward_list<point> path{};
-      for (auto* n = node_at[goal]; n != nullptr; n = n->from) {
+      for (auto *n = node_at[goal]; n != nullptr; n = n->from) {
         path.push_front(n->position);
       }
       return path;
     }
 
-    auto nodes() -> const std::deque<node> & { return nodes_; }
+    auto nodes() const -> const std::deque<node> & { return nodes_; }
 
-    auto walls() -> const std::forward_list<line> & { return walls_; }
+    auto walls() const -> const std::forward_list<line> & { return walls_; }
 
     solver(const solver &) = default;
   };
