@@ -84,7 +84,7 @@ namespace ziggygo {
       start_node->total_cost = 0;
       presumed.push(start_node);
 
-      [&presumed] {
+      [&presumed, goal_node] {
         while (!presumed.empty()) {
           auto *nearest = presumed.top();
           presumed.pop();
