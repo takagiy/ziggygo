@@ -13,13 +13,12 @@ namespace ziggygo {
       auto this_ = this->end - this->start;
       auto l_ = l.end - l.start;
 
-      auto cnls = cross_norm(this_, l.start - this->start);
-      auto cnle = cross_norm(this_, l.end - this->start);
-      auto cnts = cross_norm(l_, this->start - l.start);
-      auto cnte = cross_norm(l_, this->end - l.start);
-
-      return (cnls * cnle < 0 && cnts * cnte < 0) ||
-             (cnls == 0 || cnle == 0 || cnts == 0 || cnte == 0);
+      return cross_norm(this_, l.start - this->start) *
+                     cross_norm(this_, l.end - this->start) <=
+                 0 &&
+             cross_norm(l_, this->start - l.start) *
+                     cross_norm(l_, this->end - l.start) <=
+                 0;
     }
   };
 }; // namespace ziggygo
