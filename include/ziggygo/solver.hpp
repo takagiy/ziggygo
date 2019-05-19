@@ -82,6 +82,7 @@ namespace ziggygo {
       std::priority_queue<node *, std::vector<node *>, node_comparator>
           presumed{};
       start_node->total_cost = 0;
+      start_node->from = nullptr;
       presumed.push(start_node);
 
       [&presumed, goal_node] {
@@ -111,8 +112,11 @@ namespace ziggygo {
         -> std::forward_list<point> {
       add_node_at(start);
       add_node_at(goal);
+
+      calculate_costs(start, goal);
+
       std::forward_list<point> path{};
-      for (node *n = node_at[goal]; n == nullptr; n = n->from) {
+      for (auto* n = node_at[goal]; n != nullptr; n = n->from) {
         path.push_front(n->position);
       }
       return path;
