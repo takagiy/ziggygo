@@ -5,9 +5,13 @@
 #include "./declare.hpp"
 #include "./line.hpp"
 #include "./node.hpp"
+#include "./path.hpp"
 #include <deque>
 #include <forward_list>
-#include <unordered_map>
+#include <map>
+#include <queue>
+#include <utility>
+#include <vector>
 
 namespace ziggygo {
   template <std::size_t Width, std::size_t Height>
@@ -15,6 +19,7 @@ namespace ziggygo {
     cart cart_;
     std::forward_list<line> walls_;
     std::deque<node> nodes_;
+    std::map<point, node *, point_comparator> node_at;
 
     auto is_passible(const point &p, const point &q) const -> bool {
       for (auto &&wall : walls_) {
@@ -26,8 +31,12 @@ namespace ziggygo {
     }
 
     auto add_node_at(const point &p) -> void {
+      if (node_at.count(p) != 0) {
+        return;
+      }
       nodes_.push_back(node{p});
       auto &n = nodes_.back();
+      node_at.insert(std::make_pair(p, &n));
       for (auto &&m : nodes_) {
         if (is_passible(m.position, n.position) && m.position != n.position) {
           node::connect(distance(m.position, n.position), &m, &n);
@@ -37,7 +46,7 @@ namespace ziggygo {
 
   public:
     solver(const cart &cart, const map<Width, Height> &map)
-        : cart_{cart}, walls_{} {
+        : cart_{cart}, walls_{}, nodes_{}, node_at{} {
       for (auto &&rect : map.blocks_) {
         auto l = rect.left - cart.width;
         auto r = rect.right + cart.width;
@@ -63,13 +72,55 @@ namespace ziggygo {
       }
     }
 
-    auto nodes() -> const std::deque<node> & {
-        return nodes_;
+    auto calculate_costs(const point &start, const point &goal) -> void {
+      auto *start_node = node_at[start];
+      auto *goal_node = node_at[goal];
+      for (auto &node : nodes_) {
+        node.total_cost = std::numeric_limits<unsigned long long>::max() / 2;
+        node.sure = false;
+      }
+      std::priority_queue<node *, std::vector<node *>, node_comparator>
+          presumed{};
+      start_node->total_cost = 0;
+      presumed.push(start_node);
+
+      [&presumed] {
+        while (!presumed.empty()) {
+          auto *nearest = presumed.top();
+          presumed.pop();
+          if (nearest->sure) {
+            continue;
+          }
+          nearest->sure = true;
+          for (auto &&edge : nearest->edges) {
+            auto new_total_cost = nearest->total_cost + edge.cost;
+            if (edge.end->total_cost > new_total_cost) {
+              edge.end->total_cost = new_total_cost;
+              edge.end->from = nearest;
+              if (edge.end == goal_node) {
+                return;
+              }
+              presumed.push(edge.end);
+            }
+          }
+        }
+      }();
     }
 
-    auto walls() -> const std::forward_list<line> & {
-        return walls_;
+    auto find_path(const point &start, const point &goal)
+        -> std::forward_list<point> {
+      add_node_at(start);
+      add_node_at(goal);
+      std::forward_list<point> path{};
+      for (node *n = node_at[goal]; n == nullptr; n = n->from) {
+        path.push_front(n->position);
+      }
+      return path;
     }
+
+    auto nodes() -> const std::deque<node> & { return nodes_; }
+
+    auto walls() -> const std::forward_list<line> & { return walls_; }
 
     solver(const solver &) = default;
   };

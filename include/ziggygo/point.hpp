@@ -29,6 +29,12 @@ namespace ziggygo {
     auto dy = p.y - q.y;
     return std::sqrt(dx * dx + dy * dy);
   }
+
+  struct point_comparator {
+    auto operator()(const point &lhs, const point &rhs) const -> bool {
+      return lhs.x < rhs.x || (lhs.x == rhs.x && lhs.y < rhs.y);
+    }
+  };
 }; // namespace ziggygo
 
 #endif
