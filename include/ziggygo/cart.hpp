@@ -5,13 +5,13 @@
 #include <cstddef>
 
 namespace ziggygo {
-    struct cart {
-        double width;
-        double height;
+  struct cart {
+    double width;
+    double height;
 
-        cart() = default;
-        cart(const cart &) = default;
-    };
-}
+    cart() = default;
+    cart(const cart &) = default;
+  };
+} // namespace ziggygo
 
 #endif
