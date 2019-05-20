@@ -22,3 +22,5 @@ auto main() -> int {
   ziggygo::extra::svg("path.svg", 1000, 1000).draw(map).draw(solver).draw(path);
 }
 ```
+
+![path.svg](/doc/image/path.svg)
