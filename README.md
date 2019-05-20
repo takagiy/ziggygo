@@ -27,8 +27,8 @@ auto main() -> int {
 
 ### Output
 
-* black box ... obstacle
-* blue line... shortest route
-* yellow box ... shadow of the cart on a point
-* green line...  possible path
+* black ... obstacle
+* blue... shortest route
+* yellow ... shadow of the cart on a point
+* green ...  possible path
 <img src="/doc/image/path.svg" alt="path.svg" width="600px">
