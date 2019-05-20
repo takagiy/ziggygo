@@ -22,7 +22,7 @@ namespace ziggygo {
 
     map(const map &) = default;
 
-    auto blocks() const -> const std::vector<block> & { return blocks_; }
+    auto get_blocks() const -> const std::vector<block> & { return blocks_; }
   };
 } // namespace ziggygo
 
