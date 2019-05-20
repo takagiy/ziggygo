@@ -127,9 +127,11 @@ namespace ziggygo {
       return path;
     }
 
-    auto nodes() const -> const std::deque<node> & { return nodes_; }
+    auto get_nodes() const -> const std::deque<node> & { return nodes_; }
 
-    auto walls() const -> const std::forward_list<line> & { return walls_; }
+    auto get_walls() const -> const std::forward_list<line> & { return walls_; }
+
+    auto get_cart() const -> const ziggygo::cart & { return cart_; }
 
     solver(const solver &) = default;
   };

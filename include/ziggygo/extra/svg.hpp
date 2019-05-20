@@ -43,13 +43,45 @@ namespace ziggygo {
               << " fill=\"" << color << "\"/>\n";
       }
 
+      auto draw_rect(const point &corner, const char *color, double width,
+                     double height) -> void {
+        fout_ << "<rect x=\"" << corner.x << "\" y=\"" << corner.y
+              << "\" width=\"" << width << "\" height=\"" << height << "\""
+              << " stroke-width=\"0\""
+              << " stroke=\"" << color << "\""
+              << " fill=\"" << color << "\"/>\n";
+      }
+
+      auto draw_box(const point &corner, const char *color, double width,
+                    double height, double stroke_width) -> void {
+        draw_line(corner, point{corner.x + width, corner.y}, color,
+                  stroke_width);
+        draw_line(point{corner.x, corner.y + height},
+                  point{corner.x + width, corner.y + height}, color,
+                  stroke_width);
+        draw_line(corner, point{corner.x, corner.y + height}, color,
+                  stroke_width);
+        draw_line(point{corner.x + width, corner.y},
+                  point{corner.x + width, corner.y + height}, color,
+                  stroke_width);
+      }
+
       template <std::size_t Width, std::size_t Height>
       auto draw(const solver<Width, Height> &solver) -> svg & {
-        for (auto &&wall : solver.walls()) {
-          draw_line(wall.start, wall.end, "grey", 10);
+        for (auto &&node : solver.get_nodes()) {
+          if (node.edges.empty()) {
+            continue;
+          }
+          draw_rect(node.position, "yellow", solver.get_cart().width,
+                    solver.get_cart().height);
         }
-        for (auto &&node : solver.nodes()) {
+        for (auto &node : solver.get_nodes()) {
+          if (node.edges.empty()) {
+            continue;
+          }
           draw_circle(node.position, "green", 10);
+        }
+        for (auto &&node : solver.get_nodes()) {
           for (auto &&edge : node.edges) {
             draw_line(node.position, edge.end->position, "green", 1);
           }
@@ -59,15 +91,9 @@ namespace ziggygo {
 
       template <std::size_t Width, std::size_t Height>
       auto draw(const map<Width, Height> &map) -> svg & {
-        for (auto &&block : map.blocks()) {
-          draw_line(point{block.left, block.top}, point{block.right, block.top},
-                    "black", 5);
-          draw_line(point{block.left, block.bottom},
-                    point{block.right, block.bottom}, "black", 5);
-          draw_line(point{block.left, block.top},
-                    point{block.left, block.bottom}, "black", 5);
-          draw_line(point{block.right, block.top},
-                    point{block.right, block.bottom}, "black", 5);
+        for (auto &&block : map.get_blocks()) {
+          draw_rect(point{block.left, block.top}, "black",
+                    block.right - block.left, block.bottom - block.top);
         }
         return *this;
       }
