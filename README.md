@@ -1,3 +1,5 @@
+## Usage
+
 ```c++
 #include <ziggygo.hpp>
 #include <ziggygo/extra.hpp>
@@ -11,7 +13,7 @@ auto main() -> int {
     ziggygo::block{100, 200}.at(300, 700)
   };
 
-  // make solver by specifying cart(agent)'s size
+  // make solver by specifying size of cart(agent)
   auto solver = ziggygo::make_solver(ziggygo::cart{100, 100}, map);
 
   // find shortest route between two points on the map
@@ -23,4 +25,10 @@ auto main() -> int {
 }
 ```
 
-![path.svg](/doc/image/path.svg)
+### Output
+
+* black box ... obstacle
+* blue line... shortest route
+* yellow box ... shadow of the cart on a point
+* green line...  possible path
+<img src="/doc/image/path.svg" alt="path.svg" width="600px">
