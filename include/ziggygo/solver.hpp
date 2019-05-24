@@ -52,10 +52,10 @@ namespace ziggygo {
     solver(const cart &cart, const map<Width, Height> &map)
         : cart_{cart}, walls_{}, nodes_{}, node_at{} {
       for (auto &&rect : map.blocks_) {
-        auto l = rect.left - cart.width;
-        auto r = rect.right;
-        auto t = rect.top - cart.height;
-        auto b = rect.bottom;
+        auto l = rect.left - cart.width + Width / 10000.;
+        auto r = rect.right - Width / 10000.;
+        auto t = rect.top - cart.height + Height / 10000.;
+        auto b = rect.bottom - Height / 10000.;
 
         walls_.push_front(line{point{l, t}, point{r, t}});
         walls_.push_front(line{point{l, b}, point{r, b}});
@@ -64,10 +64,10 @@ namespace ziggygo {
       }
 
       for (auto &&rect : map.blocks_) {
-        auto l = rect.left - cart.width - 1;
-        auto r = rect.right + 1;
-        auto t = rect.top - cart.height - 1;
-        auto b = rect.bottom + 1;
+        auto l = rect.left - cart.width;
+        auto r = rect.right;
+        auto t = rect.top - cart.height;
+        auto b = rect.bottom;
 
         add_node_at(point{l, t});
         add_node_at(point{l, b});
