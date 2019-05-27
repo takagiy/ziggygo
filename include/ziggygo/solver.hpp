@@ -55,7 +55,8 @@ namespace ziggygo {
             if (m.position == p) {
               continue;
             }
-            m.edges.remove_if([&n](const edge& edge) { return edge.end == &(*n); });
+            m.edges.remove_if(
+                [&n](const edge &edge) { return edge.end == &(*n); });
           }
           nodes_.erase(n);
           break;
