@@ -48,6 +48,17 @@ namespace ziggygo {
       }
     }
 
+    auto remove_edges_to(const node *to) -> void {
+      for (auto &&node : nodes_) {
+        node.edges.remove_if([to](const edge &edge) { return edge.end == to; });
+      }
+    }
+
+    auto remove_back_node() -> void {
+      remove_edges_to(&nodes_.back());
+      nodes_.pop_back();
+    }
+
   public:
     solver(const cart &cart, const map<Width, Height> &map)
         : cart_{cart}, walls_{}, nodes_{}, node_at{} {
@@ -115,6 +126,9 @@ namespace ziggygo {
 
     auto find_path(const point &start, const point &goal)
         -> std::forward_list<point> {
+      bool start_existed = node_at.count(start) == 1;
+      bool goal_existed = node_at.count(goal) == 1;
+
       add_node_at(start);
       add_node_at(goal);
 
@@ -124,6 +138,14 @@ namespace ziggygo {
       for (auto *n = node_at[goal]; n != nullptr; n = n->from) {
         path.push_front(n->position);
       }
+
+      if (!start_existed) {
+        remove_back_node();
+      }
+      if (!goal_existed) {
+        remove_back_node();
+      }
+
       return path;
     }
 
