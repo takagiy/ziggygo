@@ -102,18 +102,18 @@ namespace ziggygo {
       auto draw(const std::forward_list<point> &path) -> svg & {
         auto prev = path.begin();
         auto p = std::next(prev);
-        draw_circle(*prev, "blue", 10);
+        draw_circle(*prev, "red", 10);
         for (auto end = path.end(); p != end; ++p) {
-          draw_line(*prev, *p, "blue", 5);
+          draw_line(*prev, *p, "red", 5);
           prev = p;
-          draw_circle(*prev, "blue", 10);
+          draw_circle(*prev, "red", 10);
         }
         return *this;
       }
 
       auto draw(const std::forward_list<point> &path, const cart &cart) -> svg & {
         for (auto &&position :path) {
-            draw_rect(position, "yellow", cart.width, cart.height);
+            draw_rect(position, "pink", cart.width, cart.height);
         }
         draw(path);
         return *this;
