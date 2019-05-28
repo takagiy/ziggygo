@@ -7,6 +7,7 @@
 
 #include "../declare.hpp"
 #include "../point.hpp"
+#include "../cart.hpp"
 #include <cstddef>
 #include <forward_list>
 #include <fstream>
@@ -107,6 +108,14 @@ namespace ziggygo {
           prev = p;
           draw_circle(*prev, "blue", 10);
         }
+        return *this;
+      }
+
+      auto draw(const std::forward_list<point> &path, const cart &cart) -> svg & {
+        for (auto &&position :path) {
+            draw_rect(position, "yellow", cart.width, cart.height);
+        }
+        draw(path);
         return *this;
       }
     };
