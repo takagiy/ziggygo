@@ -74,6 +74,17 @@ namespace ziggygo {
         walls_.push_front(line{point{r, t}, point{r, b}});
       }
 
+      auto l = -(Width / 10000.);
+      auto r = Width - cart.width + Width/ 10000. ;
+      auto t = -(Height / 10000.);
+      auto b = Height - cart.width + Height / 10000.;
+      
+      walls_.push_front(line{point{l, t}, point{r, t}});
+      walls_.push_front(line{point{l, b}, point{r, b}});
+      walls_.push_front(line{point{l, t}, point{l, b}});
+      walls_.push_front(line{point{r, t}, point{r, b}});
+
+
       for (auto &&rect : map.blocks_) {
         auto l = rect.left - cart.width;
         auto r = rect.right;
