@@ -31,6 +31,6 @@ auto main() -> int {
 
 <img src="/doc/image/path.svg" alt="path.svg" width="600px">
 
-* black ... obstacle
-* red... shortest route
-* pink ... shadow of the cart on a point
+* Black ... obstacle
+* Red ... the shortest route
+* Pink ... shadow of the cart on a point
