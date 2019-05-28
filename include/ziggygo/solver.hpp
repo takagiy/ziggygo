@@ -54,7 +54,7 @@ namespace ziggygo {
       }
     }
 
-    auto remove_back_node() -> void {
+    auto remove_newest_node() -> void {
       remove_edges_to(&nodes_.back());
       nodes_.pop_back();
     }
@@ -140,10 +140,10 @@ namespace ziggygo {
       }
 
       if (!start_existed) {
-        remove_back_node();
+        remove_newest_node();
       }
       if (!goal_existed) {
-        remove_back_node();
+        remove_newest_node();
       }
 
       return path;
