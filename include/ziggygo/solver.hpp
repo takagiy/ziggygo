@@ -48,20 +48,15 @@ namespace ziggygo {
       }
     }
 
-    auto remove_node_at(const point &p) -> void {
-      for (auto n = nodes_.begin(), end = nodes_.end(); n != end; ++n) {
-        if (n->position == p) {
-          for (auto &&m : nodes_) {
-            if (m.position == p) {
-              continue;
-            }
-            m.edges.remove_if(
-                [&n](const edge &edge) { return edge.end == &(*n); });
-          }
-          nodes_.erase(n);
-          break;
-        }
+    auto remove_edges_to(const node *to) -> void {
+      for (auto &&node : nodes_) {
+        node.edges.remove_if([to](const edge &edge) { return edge.end == to; });
       }
+    }
+
+    auto remove_back_node() -> void {
+      remove_edges_to(&nodes_.back());
+      nodes_.pop_back();
     }
 
   public:
@@ -131,8 +126,8 @@ namespace ziggygo {
 
     auto find_path(const point &start, const point &goal)
         -> std::forward_list<point> {
-      bool start_not_existed = node_at.count(start) == 0;
-      bool goal_not_existed = node_at.count(goal) == 0;
+      bool start_existed = node_at.count(start) == 1;
+      bool goal_existed = node_at.count(goal) == 1;
 
       add_node_at(start);
       add_node_at(goal);
@@ -144,11 +139,11 @@ namespace ziggygo {
         path.push_front(n->position);
       }
 
-      if (start_not_existed) {
-        remove_node_at(start);
+      if (!start_existed) {
+        remove_back_node();
       }
-      if (goal_not_existed) {
-        remove_node_at(goal);
+      if (!goal_existed) {
+        remove_back_node();
       }
 
       return path;
