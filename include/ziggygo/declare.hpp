@@ -25,7 +25,6 @@ namespace ziggygo {
   template <std::size_t, std::size_t>
   class map;
 
-  template <std::size_t, std::size_t>
   class solver;
 }; // namespace ziggygo
 
