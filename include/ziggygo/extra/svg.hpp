@@ -5,6 +5,7 @@
 #ifndef COM_GITHUB_TAKAGIY_ZIGGYGO_EXTRA_SVG
 #define COM_GITHUB_TAKAGIY_ZIGGYGO_EXTRA_SVG
 
+#include "../solver.hpp"
 #include "../declare.hpp"
 #include "../point.hpp"
 #include "../cart.hpp"
@@ -68,7 +69,7 @@ namespace ziggygo {
       }
 
       template <std::size_t Width, std::size_t Height>
-      auto draw(const solver<Width, Height> &solver) -> svg & {
+      auto draw(const solver &solver) -> svg & {
         for (auto &&node : solver.get_nodes()) {
           if (node.edges.empty()) {
             continue;

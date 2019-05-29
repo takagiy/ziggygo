@@ -18,7 +18,6 @@
 #include <vector>
 
 namespace ziggygo {
-  template <std::size_t Width, std::size_t Height>
   class solver {
     cart cart_;
     std::forward_list<line> walls_;
@@ -60,9 +59,10 @@ namespace ziggygo {
     }
 
   public:
+    template <std::size_t Width, std::size_t Height>
     solver(const cart &cart, const map<Width, Height> &map)
         : cart_{cart}, walls_{}, nodes_{}, node_at{} {
-      for (auto &&rect : map.blocks_) {
+      for (auto &&rect : map.get_blocks()) {
         auto l = rect.left - cart.width + Width / 10000.;
         auto r = rect.right - Width / 10000.;
         auto t = rect.top - cart.height + Height / 10000.;
@@ -85,7 +85,7 @@ namespace ziggygo {
       walls_.push_front(line{point{r, t}, point{r, b}});
 
 
-      for (auto &&rect : map.blocks_) {
+      for (auto &&rect : map.get_blocks()) {
         auto l = rect.left - cart.width;
         auto r = rect.right;
         auto t = rect.top - cart.height;
@@ -171,8 +171,8 @@ namespace ziggygo {
 
   template <std::size_t Width, std::size_t Height>
   auto make_solver(const cart &cart, const map<Width, Height> &map)
-      -> solver<Width, Height> {
-    return solver<Height, Width>{cart, map};
+      -> solver {
+    return solver{cart, map};
   }
 } // namespace ziggygo
 

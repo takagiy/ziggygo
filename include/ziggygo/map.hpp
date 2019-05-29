@@ -13,8 +13,6 @@
 namespace ziggygo {
   template <std::size_t Width, std::size_t Height>
   class map {
-    friend class solver<Width, Height>;
-
     std::vector<block> blocks_;
 
   public:
