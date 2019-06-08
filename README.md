@@ -34,3 +34,34 @@ auto main() -> int {
 * Black ... obstacle
 * Red ... the shortest route
 * Pink ... shadow of the cart on a point
+
+## Usage
+
+First, place this repository as a subdirectory of your project, and add below to your `CMakeLists.txt`
+
+```cmake
+add_subdirectory(ziggygo)
+```
+
+, or [install this package into your system](#installation) and ...
+
+```cmake
+find_package(ziggygo 0.1.0 REQUIRED)
+```
+
+Now, you can call the library in your project.
+
+```cmake
+target_link_libraries(your-exe ziggygo::ziggygo)
+```
+
+## Installation
+
+You can install the package into your system with `cmake`.
+```bash
+mkdir build
+cd build
+cmake .. # Install to /usr/local(UNIX), c:/ProgramFiles/ziggygo(Windows)
+         # or the specific place(`cmake .. -DCMAKE_INSTALL_PREFIX=/where/to/install`).
+make install
+```
