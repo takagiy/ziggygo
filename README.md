@@ -1,4 +1,9 @@
-# ziggygo - Find the shortest path in the field containing rectangular obstacles.
+<div>
+
+# ziggygo
+Find the shortest path in the field containing rectangular obstacles.
+
+</div>
 
 ## Example
 
@@ -26,8 +31,6 @@ auto main() -> int {
   ziggygo::extra::svg("path.svg", 1000, 1000).draw(map).draw(path, ziggygo::cart{100, 100});
 }
 ```
-
-### Output
 
 <img src="/doc/image/path.svg" alt="path.svg" width="600px">
 
@@ -58,6 +61,7 @@ target_link_libraries(your-exe ziggygo::ziggygo)
 ## Installation
 
 You can install the package into your system with `cmake`.
+
 ```bash
 mkdir build
 cd build
@@ -65,3 +69,4 @@ cmake .. # Install to /usr/local(UNIX), c:/ProgramFiles/ziggygo(Windows)
          # or the specific place(`cmake .. -DCMAKE_INSTALL_PREFIX=/where/to/install`).
 make install
 ```
+
