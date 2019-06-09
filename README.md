@@ -27,11 +27,15 @@ auto main() -> int {
 }
 ```
 
+<div>
+
 <img src="/doc/image/path.svg" alt="path.svg" width="600px">
 
 * Black … obstacles
 * Red … the shortest route
 * Pink … shadows of the cart on a point
+
+</div>
 
 ## Usage
 First, place this repository as a subdirectory of your project, and add below to your `CMakeLists.txt`
