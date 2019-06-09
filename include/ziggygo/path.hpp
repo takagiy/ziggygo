@@ -27,19 +27,19 @@ namespace ziggygo {
         : avails_{true}, waypoints_{std::move(waypoints)} {}
 
     auto begin() noexcept -> std::forward_list<point>::iterator {
-        return waypoints_.begin();
+      return waypoints_.begin();
     }
 
     auto begin() const noexcept -> std::forward_list<point>::const_iterator {
-        return waypoints_.begin();
+      return waypoints_.begin();
     }
 
     auto end() noexcept -> std::forward_list<point>::iterator {
-        return waypoints_.end();
+      return waypoints_.end();
     }
-    
+
     auto end() const noexcept -> std::forward_list<point>::const_iterator {
-        return waypoints_.end();
+      return waypoints_.end();
     }
 
     auto cbegin() const noexcept -> std::forward_list<point>::const_iterator {
@@ -50,7 +50,31 @@ namespace ziggygo {
       return waypoints_.cend();
     }
 
-    auto avails() -> bool { return avails_; }
+    operator bool() { return avails_; }
+
+    auto as_forward_list() -> std::forward_list<point> & { return waypoints_; }
+
+    auto as_forward_list() const -> const std::forward_list<point> & {
+      return waypoints_;
+    }
+
+    auto operator*() -> std::forward_list<point> & {
+        return as_forward_list();
+    }
+
+    auto operator*() const -> const std::forward_list<point> & {
+        return as_forward_list();
+    }
+
+    auto operator-> () -> std::forward_list<point> * {
+      return &this->as_forward_list();
+    }
+
+    auto operator-> () const -> const std::forward_list<point> * {
+      return &this->as_forward_list();
+    }
+
+    auto avails() const -> bool { return avails_; }
   };
 } // namespace ziggygo
 
