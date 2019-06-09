@@ -1,12 +1,7 @@
-<div>
-
 # ziggygo
 Find the shortest path in the field containing rectangular obstacles.
 
-</div>
-
 ## Example
-
 ```c++
 #include <ziggygo.hpp>
 #include <ziggygo/extra.hpp>
@@ -34,12 +29,11 @@ auto main() -> int {
 
 <img src="/doc/image/path.svg" alt="path.svg" width="600px">
 
-* Black ... obstacle
-* Red ... the shortest route
-* Pink ... shadow of the cart on a point
+* Black … obstacles
+* Red … the shortest route
+* Pink … shadows of the cart on a point
 
 ## Usage
-
 First, place this repository as a subdirectory of your project, and add below to your `CMakeLists.txt`
 
 ```cmake
@@ -59,7 +53,6 @@ target_link_libraries(your-exe ziggygo::ziggygo)
 ```
 
 ## Installation
-
 You can install the package into your system with `cmake`.
 
 ```bash
