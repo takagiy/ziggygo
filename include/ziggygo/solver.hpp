@@ -75,15 +75,14 @@ namespace ziggygo {
       }
 
       auto l = -(Width / 10000.);
-      auto r = Width - cart.width + Width/ 10000. ;
+      auto r = Width - cart.width + Width / 10000.;
       auto t = -(Height / 10000.);
       auto b = Height - cart.width + Height / 10000.;
-      
+
       walls_.push_front(line{point{l, t}, point{r, t}});
       walls_.push_front(line{point{l, b}, point{r, b}});
       walls_.push_front(line{point{l, t}, point{l, b}});
       walls_.push_front(line{point{r, t}, point{r, b}});
-
 
       for (auto &&rect : map.get_blocks()) {
         auto l = rect.left - cart.width;
@@ -135,8 +134,7 @@ namespace ziggygo {
       }();
     }
 
-    auto find_path(const point &start, const point &goal)
-        -> std::forward_list<point> {
+    auto find_path(const point &start, const point &goal) -> path {
       bool start_existed = node_at.count(start) == 1;
       bool goal_existed = node_at.count(goal) == 1;
 
@@ -145,9 +143,14 @@ namespace ziggygo {
 
       calculate_costs(start, goal);
 
-      std::forward_list<point> path{};
-      for (auto *n = node_at[goal]; n != nullptr; n = n->from) {
-        path.push_front(n->position);
+      auto *goal_node = node_at[goal];
+      if (goal_node->from == nullptr) {
+        return path::invalid();
+      }
+
+      std::forward_list<point> waypoints{};
+      for (auto *n = goal_node; n != nullptr; n = n->from) {
+        waypoints.push_front(n->position);
       }
 
       if (!start_existed) {
@@ -157,7 +160,7 @@ namespace ziggygo {
         remove_newest_node();
       }
 
-      return path;
+      return path{std::move(waypoints)};
     }
 
     auto get_nodes() const -> const std::deque<node> & { return nodes_; }
@@ -170,8 +173,7 @@ namespace ziggygo {
   };
 
   template <std::size_t Width, std::size_t Height>
-  auto make_solver(const cart &cart, const map<Width, Height> &map)
-      -> solver {
+  auto make_solver(const cart &cart, const map<Width, Height> &map) -> solver {
     return solver{cart, map};
   }
 } // namespace ziggygo
