@@ -5,10 +5,11 @@
 #ifndef COM_GITHUB_TAKAGIY_ZIGGYGO_EXTRA_SVG
 #define COM_GITHUB_TAKAGIY_ZIGGYGO_EXTRA_SVG
 
-#include "../solver.hpp"
-#include "../declare.hpp"
-#include "../point.hpp"
 #include "../cart.hpp"
+#include "../declare.hpp"
+#include "../path.hpp"
+#include "../point.hpp"
+#include "../solver.hpp"
 #include <cstddef>
 #include <forward_list>
 #include <fstream>
@@ -100,7 +101,7 @@ namespace ziggygo {
         return *this;
       }
 
-      auto draw(const std::forward_list<point> &path) -> svg & {
+      auto draw(const path &path) -> svg & {
         auto prev = path.begin();
         auto p = std::next(prev);
         draw_circle(*prev, "red", 10);
@@ -112,9 +113,9 @@ namespace ziggygo {
         return *this;
       }
 
-      auto draw(const std::forward_list<point> &path, const cart &cart) -> svg & {
-        for (auto &&position :path) {
-            draw_rect(position, "pink", cart.width, cart.height);
+      auto draw(const path &path, const cart &cart) -> svg & {
+        for (auto &&position : path) {
+          draw_rect(position, "pink", cart.width, cart.height);
         }
         draw(path);
         return *this;
