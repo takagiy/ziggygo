@@ -11,7 +11,7 @@ auto main() -> int {
                                       ziggygo::block{50, 350}.at(700, 200),
                                       ziggygo::block{100, 200}.at(300, 300)};
 
-  auto solver = ziggygo::make_solver(ziggygo::cart{100, 100}, map);
+  auto solver = ziggygo::solver{ziggygo::cart{100, 100}, map};
 
   auto path =
       solver.find_path(ziggygo::point{100, 350}, ziggygo::point{500, 700});

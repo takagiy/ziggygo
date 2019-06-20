@@ -1,5 +1,13 @@
+<!--
+  Copyright (c) TakagiY 2019
+  Distributed under the Boost Software License, Version 1.0.
+  (See accompanying file LICENSE or copy at http://boost.org/LICENSE_1_0.txt)
+-->
+
 # Solver
-The thing what you want is probably a `solver`. Its constructor takes a `map` and a `cart` to know locations of obstacles and how fat the cart is.
+The thing what you want is probably a `solver`.
+
+Its constructor takes a `map` and a `cart` to know locations of obstacles and how fat the cart is.
 
 ```c++
 auto map = ...;
@@ -32,7 +40,9 @@ block{50, 350}.at(700, 200)
 ```
 
 # Path
-The `path` is returned by `solver::find_path`. It contains a list of all waypoints on the route including start and goal. You can work with `path` in several way.
+The `path` is returned by `solver::find_path`. It contains a list of all waypoints on the route including start and goal.
+
+You can work with `path` in several way.
 
 1. You can treat the `path` as a `std::forward_list<point>` with `operator->`.
 

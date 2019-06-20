@@ -22,7 +22,7 @@ auto main() -> int {
   };
 
   // make a solver by specifying the size of the cart(agent)
-  auto solver = ziggygo::make_solver(ziggygo::cart{100, 100}, map);
+  auto solver = ziggygo::solver{ziggygo::cart{100, 100}, map};
 
   // find the shortest route between two points on the map
   auto path =
