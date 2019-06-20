@@ -22,7 +22,7 @@ auto main() -> int {
   };
 
   // make a solver by specifying the size of the cart(agent)
-  auto solver = ziggygo::make_solver(ziggygo::cart{100, 100}, map);
+  auto solver = ziggygo::solver{ziggygo::cart{100, 100}, map};
 
   // find the shortest route between two points on the map
   auto path =
@@ -42,6 +42,8 @@ auto main() -> int {
 * Pink … shadows of the cart on a point
 
 </div>
+
+## [See more about this library in /doc/README.md](/doc/README.md)
 
 ## Usage
 First, place this repository as a subdirectory of your project, and add below to your `CMakeLists.txt`
