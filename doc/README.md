@@ -9,7 +9,7 @@ English | [Japanese](/doc/README_ja.md)
 # Solver
 The thing what you want is probably a `solver`.
 
-Its constructor takes a `map` and a `cart` to know locations of obstacles and how fat the cart is.
+Its constructor takes a `map` and a `cart` to know the locations of the obstacles and how fat the cart is.
 
 ```c++
 auto map = ...;
@@ -53,7 +53,7 @@ You can work with `path` in several way.
 path->pop_front();
 ```
 
-2. `path` provide an interface for *range-based for loop*, `path::begin` and `path::end`.
+2. the `path` provide an interface for *range-based for loop*, `path::begin` and `path::end`.
 
 ```c++
 for(auto&& waypoint : path) {
@@ -61,7 +61,7 @@ for(auto&& waypoint : path) {
 }
 ```
 
-If no route was found, `solver::find_path` return invalid `path`. `path::avails` can check it.
+If no route was found, `solver::find_path` return an invalid `path`. `path::avails` can check it.
 
 ```c++
 if(!path.avails()) {

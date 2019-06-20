@@ -43,6 +43,8 @@ auto main() -> int {
 
 </div>
 
+## [See more about this library in /doc/README.md](/doc/README.md)
+
 ## Usage
 First, place this repository as a subdirectory of your project, and add below to your `CMakeLists.txt`
 
