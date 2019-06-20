@@ -1,3 +1,5 @@
+English | [Japanese](/doc/README_ja.md)
+
 # Solver
 The thing what you want is probably a `solver`. Its constructor takes a `map` and a `cart` to know locations of obstacles and how fat the cart is.
 
