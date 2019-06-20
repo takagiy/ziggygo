@@ -4,6 +4,8 @@
   (See accompanying file LICENSE or copy at http://boost.org/LICENSE_1_0.txt)
 -->
 
+English | [Japanese](/doc/README_ja.md)
+
 # Solver
 The thing what you want is probably a `solver`.
 
