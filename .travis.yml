@@ -19,7 +19,7 @@ matrix:
 
 before_script:
     - ${CXX} --version
-    - mkdie -p build
+    - mkdir -p build
     - cd build
     - cmake ..
 
