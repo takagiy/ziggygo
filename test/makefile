@@ -7,7 +7,7 @@
 run: test
 	./test
 
-test: test.cpp test_line.hpp catch.hpp
+test: test.cpp test_line.hpp  test_path.hpp catch.hpp
 	g++ test.cpp -o test -I. -I../include -std=c++11
 
 catch.hpp:

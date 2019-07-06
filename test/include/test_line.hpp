@@ -23,7 +23,7 @@ TEST_CASE("Line crossings are detected", "[line][crosses]") {
       line{point{120, 170}, point{160, 180}}));
 }
 
-TEST_CASE("Line does not cross itselves", "[line][cross][self]") {
+TEST_CASE("Line crosses itselves", "[line][cross][self]") {
   using ziggygo::line;
   using ziggygo::point;
   auto l0 = line{point{-100, 0}, point{100, 0}};
@@ -35,6 +35,6 @@ TEST_CASE("Line does not cross itselves", "[line][cross][self]") {
   auto l6 = line{point{120, 60}, point{140, 170}};
 
   for (auto &&line : {l0, l1, l2, l3, l4, l5, l6}) {
-    CHECK(!line.crosses(line));
+    CHECK(line.crosses(line));
   }
 }
