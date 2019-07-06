@@ -1,0 +1,54 @@
+language: cpp
+os: linux
+dist: xenial
+
+
+matrix:
+    include:
+        - env: CXX=g++-8 CXX_STANDARD=11
+          addons:
+              apt:
+                  packages: ['g++-8', 'libstdc++-8-dev']
+                  sources: ['ubuntu-toolchain-r-test']
+        - env: CXX=g++-8 CXX_STANDARD=14
+          addons:
+              apt:
+                  packages: ['g++-8', 'libstdc++-8-dev']
+                  sources: ['ubuntu-toolchain-r-test']
+        - env: CXX=g++-8 CXX_STANDARD=17
+          addons:
+              apt:
+                  packages: ['g++-8', 'libstdc++-8-dev']
+                  sources: ['ubuntu-toolchain-r-test']
+        - env: CXX=clang++-8 CXX_STANDARD=11
+          addons:
+              apt:
+                  packages: ['clang-8', 'libc++-8-dev', 'libc++abi-8-dev']
+                  sources: ['llvm-toolchain-xenial-8']
+        - env: CXX=clang++-8 CXX_STANDARD=14
+          addons:
+              apt:
+                  packages: ['clang-8', 'libc++-8-dev', 'libc++abi-8-dev']
+                  sources: ['llvm-toolchain-xenial-8']
+        - env: CXX=clang++-8 CXX_STANDARD=17
+          addons:
+              apt:
+                  packages: ['clang-8', 'libc++-8-dev', 'libc++abi-8-dev']
+                  sources: ['llvm-toolchain-xenial-8']
+
+
+before_script:
+    - ${CXX} --version
+    - mkdir -p build
+    - cd build
+    - |
+        if [[ $CXX = clang++* ]]; then
+          cmake -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_CXX_STANDARD=$CXX_STANDARD \
+                -DCMAKE_CXX_FLAGS=-stdlib=libc++ -DCMAKE_EXE_LINKER_FLAGS=-stdlib=libc++ ..
+        else
+          cmake -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_CXX_STANDARD=$CXX_STANDARD ..
+        fi
+
+
+script:
+    - make check
