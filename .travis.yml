@@ -1,0 +1,27 @@
+language: cpp
+os: linux
+dist: xenial
+
+
+matrix:
+    include:
+        - env: CXX=g++-8
+          addons:
+              apt:
+                  packages: ['g++-8', 'libstdc++-8-dev']
+                  sources: ['ubuntu-toolchain-r-test']
+        - env: CXX=clang++-8
+          addons:
+              apt:
+                  packages: ['clang-8', 'libc++-8-dev']
+                  sources: ['llvm-toolchain-xenial-8']
+
+
+before_script:
+    - ${CXX} --version
+    - cd build
+    - cmake ..
+
+
+script:
+    - make check
