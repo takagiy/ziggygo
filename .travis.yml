@@ -41,7 +41,7 @@ before_script:
     - ${CXX} --version
     - mkdir -p build
     - cd build
-    - cmake -DCMAKE_CXX_STANDARD=$CXX_STANDARD ..
+    - cmake -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_CXX_STANDARD=$CXX_STANDARD ..
 
 
 script:
