@@ -6,3 +6,4 @@
 #include <catch.hpp>
 
 #include "./test_line.hpp"
+#include "./test_path.hpp"
