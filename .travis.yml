@@ -23,17 +23,17 @@ matrix:
         - env: CXX=clang++-8 CXX_STANDARD=11
           addons:
               apt:
-                  packages: ['clang-8', 'libc++-8-dev']
+                  packages: ['clang-8', 'libc++-8-dev', 'libc++abi-8-dev']
                   sources: ['llvm-toolchain-xenial-8']
         - env: CXX=clang++-8 CXX_STANDARD=14
           addons:
               apt:
-                  packages: ['clang-8', 'libc++-8-dev']
+                  packages: ['clang-8', 'libc++-8-dev', 'libc++abi-8-dev']
                   sources: ['llvm-toolchain-xenial-8']
         - env: CXX=clang++-8 CXX_STANDARD=17
           addons:
               apt:
-                  packages: ['clang-8', 'libc++-8-dev']
+                  packages: ['clang-8', 'libc++-8-dev', 'libc++abi-8-dev']
                   sources: ['llvm-toolchain-xenial-8']
 
 
