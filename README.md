@@ -4,11 +4,11 @@
   (See accompanying file LICENSE or copy at http://boost.org/LICENSE_1_0.txt)
 -->
 
-# ziggygo [![Build Status](https://travis-ci.com/takagiy/ziggygo.svg?branch=master)](https://travis-ci.com/takagiy/ziggygo) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/137064ebc2f744b1af09fbbff5f08472)](https://app.codacy.com/app/takagiy/ziggygo?utm_source=github.com&utm_medium=referral&utm_content=takagiy/ziggygo&utm_campaign=Badge_Grade_Settings)
+# ziggygo [![Build Status](https://travis-ci.com/takagiy/ziggygo.svg?branch=master)](https://travis-ci.com/takagiy/ziggygo) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/137064ebc2f744b1af09fbbff5f08472)](https://app.codacy.com/app/takagiy/ziggygo?utm_source=github.com&utm_medium=referral&utm_content=takagiy/ziggygo&utm_campaign=Badge_Grade_Settings) [![License BSL-1.0](https://img.shields.io/badge/License-BSL--1.0-blue.svg)](LICENSE)
 
 Find the shortest path in the field containing rectangular obstacles.
 
-## Example
+# Example
 ```c++
 #include <ziggygo.hpp>
 #include <ziggygo/extra.hpp>
@@ -44,9 +44,15 @@ auto main() -> int {
 
 </div>
 
-## [See more about this library in /doc/README.md](/doc/README.md)
+## [See more about this library on /doc/README.md](/doc/README.md)
 
-## Usage
+# License
+
+Copyright (c) TakagiY 2019   
+Distributed under the Boost Software License, Version 1.0.   
+(See accompanying file [LICENSE](LICENSE) or copy at http://boost.org/LICENSE_1_0.txt)
+
+# Usage
 First, place this repository as a subdirectory of your project, and add below to your `CMakeLists.txt`
 
 ```cmake
@@ -65,7 +71,7 @@ Now, you can call the library in your project.
 target_link_libraries(your-exe ziggygo::ziggygo)
 ```
 
-## Installation
+# Installation
 You can install the package into your system with `cmake`.
 
 ```bash
