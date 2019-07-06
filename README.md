@@ -4,9 +4,7 @@
   (See accompanying file LICENSE or copy at http://boost.org/LICENSE_1_0.txt)
 -->
 
-# ziggygo
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/137064ebc2f744b1af09fbbff5f08472)](https://app.codacy.com/app/takagiy/ziggygo?utm_source=github.com&utm_medium=referral&utm_content=takagiy/ziggygo&utm_campaign=Badge_Grade_Settings)
+# ziggygo [![Codacy Badge](https://api.codacy.com/project/badge/Grade/137064ebc2f744b1af09fbbff5f08472)](https://app.codacy.com/app/takagiy/ziggygo?utm_source=github.com&utm_medium=referral&utm_content=takagiy/ziggygo&utm_campaign=Badge_Grade_Settings)
 
 Find the shortest path in the field containing rectangular obstacles.
 
