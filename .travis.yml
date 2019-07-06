@@ -17,11 +17,18 @@ matrix:
                   sources: ['llvm-toolchain-xenial-8']
 
 
+env:
+    matrix:
+        - CXX_STANDARD=11
+        - CXX_STANDARD=14
+        - CXX_STANDARD=17
+
+
 before_script:
     - ${CXX} --version
     - mkdir -p build
     - cd build
-    - cmake ..
+    - cmake -DCMAKE_CXX_STANDARD=$CXX_STANDARD ..
 
 
 script:
