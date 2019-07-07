@@ -8,7 +8,7 @@
 
 Find the shortest path in the field containing rectangular obstacles.
 
-# Example
+## Example
 ```c++
 #include <ziggygo.hpp>
 #include <ziggygo/extra.hpp>
@@ -38,21 +38,19 @@ auto main() -> int {
 
 <img src="/doc/image/path.svg" alt="path.svg" width="600px">
 
-* Black … obstacles
-* Red … the shortest route
-* Pink … shadows of the cart on a point
+*  Black … obstacles
+*  Red … the shortest route
+*  Pink … shadows of the cart on a point
 
 </div>
 
-## [See more about this library on /doc/README.md](/doc/README.md)
-
-# License
-
+### [See more about this library on /doc/README.md](/doc/README.md)
+## License
 Copyright (c) TakagiY 2019   
 Distributed under the Boost Software License, Version 1.0.   
-(See accompanying file [LICENSE](LICENSE) or copy at http://boost.org/LICENSE_1_0.txt)
+(See accompanying file [LICENSE](LICENSE) or copy at [http://boost.org/LICENSE\_1\_0.txt](http://boost.org/LICENSE_1_0.txt))
 
-# Usage
+## Usage
 First, place this repository as a subdirectory of your project, and add below to your `CMakeLists.txt`
 
 ```cmake
@@ -71,7 +69,7 @@ Now, you can call the library in your project.
 target_link_libraries(your-exe ziggygo::ziggygo)
 ```
 
-# Installation
+## Installation
 You can install the package into your system with `cmake`.
 
 ```bash
