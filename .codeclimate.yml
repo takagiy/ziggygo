@@ -1,0 +1,15 @@
+version: "2"
+plugins:
+    cppcheck:
+        enabled: true
+        exclude_patterns:
+            - "test/"
+        config:
+            check: all
+            language: c++
+            stds:
+                - c++11
+                - c++14
+            #   - c++17 -- May not supported by cppcheck cli
+            includes:
+                - include/
