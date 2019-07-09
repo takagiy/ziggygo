@@ -55,6 +55,6 @@ script:
 after_success:
     - '[[ $CODECOV == true ]] || travis_terminate 0'
     - rm * -rf
-    - cmake -DREPORT_COVERAGE=ON -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_CXX_STANDARD=$CXX_STANDARD $CMAKE_EXTRA_OPTIONS ..
+    - cmake -DREPORT_COVERAGE=ON -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_STANDARD=$CXX_STANDARD $CMAKE_EXTRA_OPTIONS ..
     - make coverage.txt
     - bash <(curl -s https://codecov.io/bash) -f coverage.txt
