@@ -4,6 +4,15 @@
 
 cmake_minimum_required(VERSION 3.8)
 
+add_executable(test.out ${CMAKE_CURRENT_SOURCE_DIR}/src/test.cpp)
+
+target_include_directories(
+    test.out
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
+            ${CMAKE_CURRENT_BINARY_DIR}/external/catch/include)
+
+target_link_libraries(test.out ziggygo::ziggygo)
+
 include(ExternalProject)
 
 ExternalProject_Add(
@@ -17,21 +26,49 @@ ExternalProject_Add(
     BUILD_COMMAND ""
     INSTALL_COMMAND "")
 
-add_executable(test-command ${CMAKE_CURRENT_SOURCE_DIR}/src/test.cpp)
+add_dependencies(test.out catch)
 
-add_dependencies(test-command catch)
-
-target_include_directories(
-    test-command
-    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
-            ${CMAKE_CURRENT_BINARY_DIR}/external/catch/include)
-
-target_link_libraries(test-command ziggygo::ziggygo)
-
-add_test(NAME all-tests
-         COMMAND $<TARGET_FILE:test-command>)
+add_test(NAME all_tests
+         COMMAND $<TARGET_FILE:test.out>)
 
 add_custom_target(check
                   COMMENT "Build and run all tests."
-                  DEPENDS test-command
+                  DEPENDS test.out
                   COMMAND ${CMAKE_CTEST_COMMAND})
+
+if(REPORT_COVERAGE)
+    if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        message(FATAL_ERROR
+                "Option REPORT_COVERAGE currently only supports clang++.\n"
+                "Please unset option REPORT_COVERAGE or set the compiler to clang++.\n"
+                "(e.g. -DREPORT_COVERAGE=OFF or -DCMAKE_CXX_COMPILER=clang++)")
+    endif()
+
+    target_compile_options(
+        test.out
+        PRIVATE $<1:-fprofile-instr-generate>
+                $<1:-fcoverage-mapping>
+                $<1:-g>)
+
+    target_link_libraries(
+        test.out
+        $<1:-fprofile-instr-generate>
+        $<1:-fcoverage-mapping>
+        $<1:-g>)
+
+    add_custom_target(
+        coverage.profraw
+        DEPENDS test.out
+        COMMAND LLVM_PROFILE_FILE=${PROJECT_BINARY_DIR}/coverage.profraw $<TARGET_FILE:test.out>)
+
+    add_custom_target(
+        coverage.profdata
+        DEPENDS coverage.profraw
+        COMMAND llvm-profdata merge ${PROJECT_BINARY_DIR}/coverage.profraw -output=${PROJECT_BINARY_DIR}/coverage.profdata)
+
+    add_custom_target(
+        coverage.txt
+        COMMENT "Generate coverage.txt."
+        DEPENDS coverage.profdata
+        COMMAND llvm-cov show $<TARGET_FILE:test.out> -instr-profile=${PROJECT_BINARY_DIR}/coverage.profdata > ${PROJECT_BINARY_DIR}/coverage.txt)
+endif()

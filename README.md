@@ -4,7 +4,7 @@
   (See accompanying file LICENSE or copy at http://boost.org/LICENSE_1_0.txt)
 -->
 
-# ziggygo [![Build Status](https://travis-ci.com/takagiy/ziggygo.svg?branch=master)](https://travis-ci.com/takagiy/ziggygo) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/137064ebc2f744b1af09fbbff5f08472)](https://app.codacy.com/app/takagiy/ziggygo?utm_source=github.com&utm_medium=referral&utm_content=takagiy/ziggygo&utm_campaign=Badge_Grade_Settings) [![License BSL-1.0](https://img.shields.io/badge/License-BSL--1.0-blue.svg)](LICENSE)
+# ziggygo [![Build Status](https://travis-ci.com/takagiy/ziggygo.svg?branch=master)](https://travis-ci.com/takagiy/ziggygo) [![codecov](https://codecov.io/gh/takagiy/ziggygo/branch/master/graph/badge.svg)](https://codecov.io/gh/takagiy/ziggygo) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/137064ebc2f744b1af09fbbff5f08472)](https://app.codacy.com/app/takagiy/ziggygo?utm_source=github.com&utm_medium=referral&utm_content=takagiy/ziggygo&utm_campaign=Badge_Grade_Settings) [![License BSL-1.0](https://img.shields.io/badge/License-BSL--1.0-blue.svg)](LICENSE)
 
 Find the shortest path in the field containing rectangular obstacles.
 

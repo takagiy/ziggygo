@@ -30,7 +30,7 @@ matrix:
               apt:
                   packages: ['clang-8', 'libc++-8-dev', 'libc++abi-8-dev']
                   sources: ['llvm-toolchain-xenial-8']
-        - env: CXX=clang++-8 CXX_STANDARD=17
+        - env: CXX=clang++-8 CXX_STANDARD=17 CODECOV=true
           addons:
               apt:
                   packages: ['clang-8', 'libc++-8-dev', 'libc++abi-8-dev']
@@ -43,12 +43,18 @@ before_script:
     - cd build
     - |
         if [[ $CXX = clang++* ]]; then
-          cmake -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_CXX_STANDARD=$CXX_STANDARD \
-                -DCMAKE_CXX_FLAGS=-stdlib=libc++ -DCMAKE_EXE_LINKER_FLAGS=-stdlib=libc++ ..
-        else
-          cmake -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_CXX_STANDARD=$CXX_STANDARD ..
+          export CMAKE_EXTRA_OPTIONS="-DCMAKE_CXX_FLAGS=-stdlib=libc++ -DCMAKE_EXE_LINKER_FLAGS=-stdlib=libc++"
         fi
 
 
 script:
+    - cmake -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_CXX_STANDARD=$CXX_STANDARD $CMAKE_EXTRA_OPTIONS ..
     - make check
+
+
+after_success:
+    - '[[ $CODECOV == true ]] || travis_terminate 0'
+    - rm * -rf
+    - cmake -DREPORT_COVERAGE=ON -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_STANDARD=$CXX_STANDARD $CMAKE_EXTRA_OPTIONS ..
+    - make coverage.txt
+    - bash <(curl -s https://codecov.io/bash) -f coverage.txt

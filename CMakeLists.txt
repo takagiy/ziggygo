@@ -8,6 +8,10 @@ project(ziggygo
         VERSION 0.1.0
         LANGUAGES CXX)
 
+option(REPORT_COVERAGE
+       "Generate coverage.txt with clang and llvm-cov."
+       OFF)
+
 add_library(ziggygo INTERFACE)
 
 add_library(ziggygo::ziggygo ALIAS ziggygo)
