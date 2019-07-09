@@ -46,15 +46,15 @@ if(REPORT_COVERAGE)
 
     target_compile_options(
         test.out
-        PRIVATE $<1:-fprofile-instr-generate
-                    -fcoverage-mapping
-                    -g>)
+        PRIVATE $<1:-fprofile-instr-generate>
+                $<1:-fcoverage-mapping>
+                $<1:-g>)
 
-    target_link_options(
+    target_link_libraries(
         test.out
-        PRIVATE $<1:-fprofile-instr-generate
-                    -fcoverage-mapping
-                    -g>)
+        $<1:-fprofile-instr-generate>
+        $<1:-fcoverage-mapping>
+        $<1:-g>)
 
     add_custom_target(
         coverage.profraw
