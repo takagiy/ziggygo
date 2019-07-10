@@ -36,39 +36,44 @@ add_custom_target(check
                   DEPENDS test.out
                   COMMAND ${CMAKE_CTEST_COMMAND})
 
-if(REPORT_COVERAGE)
-    if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-        message(FATAL_ERROR
-                "Option REPORT_COVERAGE currently only supports clang++.\n"
-                "Please unset option REPORT_COVERAGE or set the compiler to clang++.\n"
-                "(e.g. -DREPORT_COVERAGE=OFF or -DCMAKE_CXX_COMPILER=clang++)")
-    endif()
+option(REPORT_COVERAGE
+       "Generate coverage report files with clang and llvm-cov."
+       OFF)
 
-    target_compile_options(
-        test.out
-        PRIVATE $<1:-fprofile-instr-generate>
-                $<1:-fcoverage-mapping>
-                $<1:-g>)
-
-    target_link_libraries(
-        test.out
-        $<1:-fprofile-instr-generate>
-        $<1:-fcoverage-mapping>
-        $<1:-g>)
-
-    add_custom_target(
-        coverage.profraw
-        DEPENDS test.out
-        COMMAND LLVM_PROFILE_FILE=${PROJECT_BINARY_DIR}/coverage.profraw $<TARGET_FILE:test.out>)
-
-    add_custom_target(
-        coverage.profdata
-        DEPENDS coverage.profraw
-        COMMAND llvm-profdata merge ${PROJECT_BINARY_DIR}/coverage.profraw -output=${PROJECT_BINARY_DIR}/coverage.profdata)
-
-    add_custom_target(
-        coverage.txt
-        COMMENT "Generate coverage.txt."
-        DEPENDS coverage.profdata
-        COMMAND llvm-cov show $<TARGET_FILE:test.out> -instr-profile=${PROJECT_BINARY_DIR}/coverage.profdata > ${PROJECT_BINARY_DIR}/coverage.txt)
+if(NOT REPORT_COVERAGE)
+    return()
 endif()
+
+if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    message(FATAL_ERROR
+            "Option REPORT_COVERAGE currently only supports clang++.\n"
+            "Please unset option REPORT_COVERAGE or set the compiler to clang++.\n"
+            "(e.g. -DREPORT_COVERAGE=OFF or -DCMAKE_CXX_COMPILER=clang++)")
+endif()
+
+target_compile_options(
+    test.out
+    PRIVATE $<1:-fprofile-instr-generate>
+            $<1:-fcoverage-mapping>
+            $<1:-g>)
+
+target_link_libraries(
+    test.out
+    $<1:-fprofile-instr-generate>
+    $<1:-fcoverage-mapping>
+    $<1:-g>)
+
+add_custom_target(
+    coverage.profraw
+    DEPENDS test.out
+    COMMAND LLVM_PROFILE_FILE=${PROJECT_BINARY_DIR}/coverage.profraw $<TARGET_FILE:test.out>)
+
+add_custom_target(
+    coverage.profdata
+    DEPENDS coverage.profraw
+    COMMAND llvm-profdata merge ${PROJECT_BINARY_DIR}/coverage.profraw -output=${PROJECT_BINARY_DIR}/coverage.profdata)
+
+add_custom_target(
+    coverage.txt
+    DEPENDS coverage.profdata
+    COMMAND llvm-cov show $<TARGET_FILE:test.out> -instr-profile=${PROJECT_BINARY_DIR}/coverage.profdata > ${PROJECT_BINARY_DIR}/coverage.txt)

@@ -8,10 +8,6 @@ project(ziggygo
         VERSION 0.1.0
         LANGUAGES CXX)
 
-option(REPORT_COVERAGE
-       "Generate coverage.txt with clang and llvm-cov."
-       OFF)
-
 add_library(ziggygo INTERFACE)
 
 add_library(ziggygo::ziggygo ALIAS ziggygo)
@@ -42,6 +38,12 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ziggygo-config-version.cmake
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
         DESTINATION include)
+
+get_directory_property(parent_directory PARENT_DIRECTORY)
+
+if(parent_directory)
+    return()
+endif()
 
 include(CTest)
     
